@@ -1,6 +1,6 @@
 ---
 title: "Assignment 2: Coding Basics"
-author: "Student Name"
+author: "Sean Burke"
 output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
@@ -32,11 +32,12 @@ This exercise accompanies the lessons/labs in Environmental Data Analytics on co
 
 ```{r basics 1}
 #1. 
-
+Fives <- c(1,5,10,15,20,25,30,35,40,45,50,55) #Creating a sequence from 1 to 55 coutning by 5
 #2. 
-
+mean(Fives) #calculating the mean of the number sequence
+median(Fives) #determining the median of the sequence
 #3. 
-
+pmax(mean(Fives), median(Fives)) #I am returning the larger of the two values, mean or median
 ```
 
 ## Basics, Part 2
@@ -50,13 +51,19 @@ This exercise accompanies the lessons/labs in Environmental Data Analytics on co
 8.  Label the columns of your data frame with informative titles.
 
 ```{r basics 2}
-
-
+#5.
+Students <- c("John","Jane","Sean","Bruce") #vector type: string
+Grades <- c(92,98,55,78) #vector type: numeric
+Scholarship <- c(TRUE,TRUE,FALSE,FALSE) #vector type: boolean
+#7.
+student_info <- data.frame(Students,Grades,Scholarship)
+#8.
+names(student_info) <- c("Name","Grade","Scholarship")
 ```
 
 9.  QUESTION: How is this data frame different from a matrix?
 
-> Answer:
+> Answer:A data set can contain information of many types but a matrix can only hold data of a single type. The columns in a data frame can also be named to categorize several types of data.
 
 10. Create a function with one input. In this function, use `if`...`else` to evaluate the value of the input: if it is greater than 50, print the word "Pass"; otherwise print the word "Fail". 
 
@@ -68,21 +75,31 @@ This exercise accompanies the lessons/labs in Environmental Data Analytics on co
 
 ```{r basics 3}
 #10. Create a function using if...else
-
+Pass_or_Fail <- function(x){
+  if(x < 50) {
+  print("Fail")
+  } else if(x > 50) {
+  print("Pass")
+  }
+}
 #11. Create a function using ifelse()
-
+Pass_or_Fail2 <- function(x){
+  ifelse(x < 50, "Fail", "Pass")
+}
 #12a. Run the first function with the value 52.5
-
+Pass_or_Fail(52.5)
 #12b. Run the second function with the value 52.5
-
+Pass_or_Fail2(52.5)
 #13a. Run the first function with the vector of test scores
-
+Test_Results <- c(45,90,67,19,78)
+#Pass_or_Fail(Test_Results)
 #13b. Run the second function with the vector of test scores
+Pass_or_Fail2(Test_Results)
 ```
 
 14. QUESTION: Which option of `if`...`else` vs. `ifelse` worked? Why? (Hint: search the web for "R vectorization")
 
-> Answer:
+> Answer:Only the ifelse worked, the if...else did not. This is because if...else statements can only print results of one input at a time, not a whole vector's worth. So because these operations are vectorized, meaning every input is being run at once, a regular if..else statement cannot handle the multiple inputs, so only the ifelse statement can work.
 
 
 **NOTE** Before knitting, you'll need to comment out the call to the function in Q13 that does not work. (A document can't knit if the code it contains causes an error!)
