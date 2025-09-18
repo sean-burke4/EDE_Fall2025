@@ -1,5 +1,5 @@
 ---
-title: "<Sean Burke>_Assignment 1: Introduction"
+title: "<Sean Burke>Assignment 1: Introduction"
 author: "Sean Burke"
 output: pdf_document
 ---
