@@ -84,17 +84,16 @@ Now tweak the above code so that the variable we plot (`tp_ug`) is specified as 
 To do this we need to convince R that the value we associate with the `y` aesthetic is a variable, not a column name. This is done by the odd convention of inserting the variable within the code `!!sym()`. The `!!` (pronounced "bang-bang") combined with `sym()` are "Tidy eval helpers" necessary because tidy-R does away with quotations. See more info [here](https://ggplot2.tidyverse.org/reference/tidyeval.html).
 
 ```{r Tweak plot to use variables, echo=FALSE, eval=FALSE, warning=FALSE}
-#Create variables
-the_parameter <- 'tp_ug'
+#Create plot variables
+the_parameter <- "tp_ug"
 start_year <- 1990
 end_year <- 2016
 
 #Construct the plot
-my_plot2 <- nutrient_data %>% 
+my_plot3 <- nutrient_data %>% 
   filter(year4 > start_year & year4 < end_year) %>% 
   ggplot(aes(
     x = sampledate,
-    #y = .data[[the_parameter]], #-or-
     y = !!sym(the_parameter),
     color = depth,
     shape = lakename)) +
@@ -102,7 +101,7 @@ my_plot2 <- nutrient_data %>%
   scale_x_date(
     date_breaks = "1 years",
     date_labels = '%Y') +
-  scale_shape_manual(values = c(17, 18)) +
+  scale_shape_manual(values = c(17, 15)) +
   labs(
     title = "Concentration over time, by depth and lake",
     x = "Date", 
@@ -114,7 +113,8 @@ my_plot2 <- nutrient_data %>%
     guide = guide_colorbar(reverse = T),
     direction = -1)
 
-my_plot2
+#View the plot
+my_plot3
 ```
 
 
@@ -154,7 +154,7 @@ plot_it <- function(the_parameter,start_year,end_year){
 }
 
 #Now run the plot function
-plot_it('tn_ug',1995,2005)
+plot_it('po4',1995,2002)
 ```
 
 
@@ -195,6 +195,8 @@ numericInput("n",
 renderTable({
 head(cars, input$n)
 })
+
+numeric
 ```
 
 Run the document. Along with all the Markdown, you'll see the same interactive app as before. 
@@ -252,6 +254,10 @@ renderPlot(
     input$yearSlider[1],
     input$yearSlider[2]
     )
+)
+
+renderText(
+  paste("you selected", input$the_nutrient)
 )
 ```
 
