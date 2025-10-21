@@ -97,8 +97,14 @@ summary_Ozone <- epa_data %>%
   arrange(mean_Ozone)
 
 #Use the `kable` function to produce the 2 tables in markdown format
-knitr::kable(summary_PM25, caption = "Mean Particulates (2.5 mm)")
-knitr::kable(summary_Ozone, caption = "Mean Ozone")
+knitr::kable(summary_PM25,
+             caption = "Mean Particulates (2.5 mm)",
+             col.names = c("County", "$\\mu g/m^3$"),
+             digits = c(0,2))
+knitr::kable(summary_Ozone,
+             caption = "Mean Ozone",
+             col.names = c("County", "$\\mu g/m^3$"),
+             digits = c(0,2))
 
 ```
 
